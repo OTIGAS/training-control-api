@@ -4,7 +4,7 @@ import com.tiago_faria_gouvea.training_control_api.domains.Employee;
 import com.tiago_faria_gouvea.training_control_api.domains.Team;
 import com.tiago_faria_gouvea.training_control_api.domains.TeamParticipant;
 import com.tiago_faria_gouvea.training_control_api.dtos.TeamParticipantDTO;
-import com.tiago_faria_gouvea.training_control_api.infra.config.exception.ResourceNotFoundException;
+import com.tiago_faria_gouvea.training_control_api.config.exception.ResourceNotFoundException;
 import com.tiago_faria_gouvea.training_control_api.repositories.IEmployeeRepository;
 import com.tiago_faria_gouvea.training_control_api.repositories.ITeamParticipantRepository;
 import com.tiago_faria_gouvea.training_control_api.repositories.ITeamRepository;
@@ -112,9 +112,18 @@ class TeamParticipantServiceTest {
   @Test
   @DisplayName("should return list of participants by team")
   void findParticipantsByTeamTeamParticipantCase1() {
+    Integer teamCode = 100;
     List<Employee> expected = List.of(new Employee());
-    Mockito.when(repository.findParticipantsByTeam(100)).thenReturn(expected);
-    List<Employee> result = teamParticipantService.findParticipantsByTeam(100);
+
+    Mockito.when(teamRepository.findByCode(teamCode))
+        .thenReturn(Optional.of(new Team()));
+
+    Mockito.when(repository.findParticipantsByTeam(teamCode))
+        .thenReturn(expected);
+
+    List<Employee> result = teamParticipantService
+        .findParticipantsByTeam(teamCode);
+
     assertEquals(expected, result);
   }
 }

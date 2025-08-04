@@ -1,5 +1,6 @@
 package com.tiago_faria_gouvea.training_control_api.controllers;
 
+import com.tiago_faria_gouvea.training_control_api.config.swagger.controllers.TeamParticipantApi;
 import com.tiago_faria_gouvea.training_control_api.domains.Employee;
 import com.tiago_faria_gouvea.training_control_api.dtos.TeamParticipantDTO;
 import com.tiago_faria_gouvea.training_control_api.services.TeamParticipantService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/team-participants")
-public class TeamParticipantController {
+public class TeamParticipantController implements TeamParticipantApi {
   private final TeamParticipantService service;
 
   public TeamParticipantController(

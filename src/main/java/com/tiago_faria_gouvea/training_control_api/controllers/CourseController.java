@@ -1,5 +1,6 @@
 package com.tiago_faria_gouvea.training_control_api.controllers;
 
+import com.tiago_faria_gouvea.training_control_api.config.swagger.controllers.CourseApi;
 import com.tiago_faria_gouvea.training_control_api.domains.Course;
 import com.tiago_faria_gouvea.training_control_api.dtos.CourseDTO;
 import com.tiago_faria_gouvea.training_control_api.services.CourseService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/courses")
-public class CourseController {
+public class CourseController implements CourseApi {
   private final CourseService service;
 
   public CourseController(

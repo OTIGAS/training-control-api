@@ -42,6 +42,20 @@ public class EmployeeRepository implements IEmployeeRepository {
     }
   }
 
+  /**
+   * Mapeia uma linha do ResultSet para um objeto Employee.
+   *
+   * Usa os aliases definidos em EmployeeQueryFragments para acessar as colunas
+   * corretamente (ex: "Codigo_employee", "Nome_employee", etc).
+   *
+   * Esse método é usado em consultas que usam esses fragmentos, garantindo que o
+   * mapeamento fique alinhado com os nomes das colunas na query.
+   *
+   * @param rs ResultSet com os dados retornados da consulta
+   * @param rowNum índice da linha atual (normalmente não usado aqui)
+   * @return objeto Employee preenchido com os dados da linha
+   * @throws SQLException se ocorrer erro ao ler os dados do ResultSet
+   */
   public Employee mapRowEmployee(ResultSet rs, int rowNum) throws SQLException {
     return Employee.builder()
         .code(rs.getInt("Codigo_" + columnSuffixEmployee))

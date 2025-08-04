@@ -1,5 +1,6 @@
 package com.tiago_faria_gouvea.training_control_api.controllers;
 
+import com.tiago_faria_gouvea.training_control_api.config.swagger.controllers.TeamApi;
 import com.tiago_faria_gouvea.training_control_api.domains.Team;
 import com.tiago_faria_gouvea.training_control_api.dtos.TeamDTO;
 import com.tiago_faria_gouvea.training_control_api.services.TeamService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/teams")
-public class TeamController {
+public class TeamController implements TeamApi {
   private final TeamService service;
 
   public TeamController(

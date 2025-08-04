@@ -92,6 +92,20 @@ public class TeamRepository implements ITeamRepository {
     }
   }
 
+  /**
+   * Mapeia uma linha do ResultSet para um objeto Team.
+   *
+   * Usa os aliases definidos em TeamQueryFragments para pegar as colunas certas,
+   * como "Codigo_team", "Inicio_team" e por aí vai.
+   *
+   * Além disso, se o código do curso existir, já aproveita para chamar o mapeamento
+   * do curso usando o courseRepository, trazendo o objeto Course junto.
+   *
+   * @param rs ResultSet com os dados da consulta
+   * @param rowNum índice da linha (normalmente não usado aqui)
+   * @return objeto Team completo com dados da turma e, se disponível, o curso associado
+   * @throws SQLException se ocorrer problema ao ler dados do ResultSet
+   */
   public Team mapRowTeam(ResultSet rs, int rowNum) throws SQLException {
     Team team = Team.builder()
         .code(rs.getInt("Codigo_" + columnSuffixTeam))

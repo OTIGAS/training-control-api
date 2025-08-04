@@ -74,7 +74,7 @@ public class TeamParticipantRepository implements ITeamParticipantRepository {
         tableAliasTeamParticipant,
         tableAliasTeamParticipant
     );
-    System.out.println(sqlCommand);
+
     try {
       TeamParticipant teamParticipant = jdbcTemplate.queryForObject(
           sqlCommand,
@@ -87,6 +87,22 @@ public class TeamParticipantRepository implements ITeamParticipantRepository {
     }
   }
 
+  /**
+   * Mapeia uma linha do ResultSet para um objeto TeamParticipant.
+   *
+   * Usa os aliases definidos em TeamParticipantQueryFragments pra acessar as colunas,
+   * tipo "Codigo_teamParticipant", "Turma_teamParticipant" e "Funcionario_teamParticipant".
+   *
+   * Se o código da turma existir, já chama o mapeamento do time com o teamRepository.
+   * Se o código do participante existir, faz o mesmo com o funcionário via employeeRepository.
+   *
+   * Isso ajuda a montar o objeto completo com os dados relacionados na mesma consulta.
+   *
+   * @param rs ResultSet com os dados da query
+   * @param rowNum índice da linha atual (geralmente não usado)
+   * @return objeto TeamParticipant com times e participantes carregados, se houver
+   * @throws SQLException em caso de erro ao ler dados do ResultSet
+   */
   public TeamParticipant mapRowTeamParticipant(
       ResultSet rs, int rowNum
   ) throws SQLException {

@@ -106,6 +106,20 @@ public class CourseRepository implements ICourseRepository {
     }
   }
 
+  /**
+   * Mapeia uma linha do ResultSet para um objeto Course.
+   *
+   * Usa os aliases definidos nos CourseQueryFragments para pegar as colunas
+   * com os nomes corretos (ex: "Codigo_course", "Nome_course", etc).
+   *
+   * Esse método é usado principalmente em consultas que já usam os fragmentos SQL,
+   * garantindo que o mapeamento seja consistente com os aliases das colunas.
+   *
+   * @param rs ResultSet com os dados da consulta SQL
+   * @param rowNum índice da linha atual (geralmente não usado aqui)
+   * @return um objeto Course populado com os dados da linha
+   * @throws SQLException caso tenha problema ao acessar os dados do ResultSet
+   */
   public Course mapRowCourse(ResultSet rs, int rowNum) throws SQLException {
     return Course.builder()
         .code(rs.getInt("Codigo_" + columnSuffixCourse))
