@@ -52,8 +52,17 @@ public class CourseRepository implements ICourseRepository {
   }
 
   public Integer delete(Integer courseCode) {
-    String sqlCommand = "DELETE FROM Curso WHERE Codigo = ?";
-    return jdbcTemplate.update(sqlCommand, courseCode);
+    String deleteParticipantsSql =
+        "DELETE TP FROM TurmaParticipante TP " +
+            "JOIN Turma T ON TP.Turma = T.Codigo " +
+            "WHERE T.Curso = ?";
+    jdbcTemplate.update(deleteParticipantsSql, courseCode);
+
+    String deleteClassesSql = "DELETE FROM Turma WHERE Curso = ?";
+    jdbcTemplate.update(deleteClassesSql, courseCode);
+
+    String deleteCourseSql = "DELETE FROM Curso WHERE Codigo = ?";
+    return jdbcTemplate.update(deleteCourseSql, courseCode);
   }
 
   public List<Course> findAll() {
