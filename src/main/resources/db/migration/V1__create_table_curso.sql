@@ -1,0 +1,6 @@
+CREATE TABLE Curso (
+    Codigo INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Descricao VARCHAR(4000) NOT NULL,
+    Duracao INT NOT NULL
+);
